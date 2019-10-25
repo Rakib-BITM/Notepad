@@ -1,5 +1,6 @@
 package com.rakib.notepad.adapter;
 
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -104,7 +105,7 @@ public class NoteRVAdapter extends RecyclerView.Adapter<NoteRVAdapter.NoteViewHo
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.delete_note_dialog, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Delete Note");
+        builder.setTitle("");
         builder.setView(view);
         builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
             @Override
@@ -117,8 +118,6 @@ public class NoteRVAdapter extends RecyclerView.Adapter<NoteRVAdapter.NoteViewHo
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
-
 
 
 }
