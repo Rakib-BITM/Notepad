@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rakib.notepad.adapter.NoteRVAdapter;
@@ -19,21 +20,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class NoteUpdateActivity extends AppCompatActivity implements NoteRVAdapter.RowItemEditListener {
-    private View v;
+public class NoteUpdateActivity extends AppCompatActivity {
+    private EditText editInput;
 
+    private Note note;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_update);
         setTitle("Update Note");
-        v =new View(this);
-        long id = getIntent().getIntExtra("noteId", -1);
-        if (id>0){
-            Note note = NoteDB.getInstance(this).getNoteDao().getNoteByID(id);
-            EditText edt = findViewById(R.id.updateET);
-            edt.setText(note.getNote());
-        }
+        editInput = findViewById(R.id.updateET);
+        note = (Note) getIntent().getSerializableExtra("note");
+        long id = note.getId();
+        Note note1 = NoteDB.getInstance(this).getNoteDao().getNoteByID(id);
+        editInput.setText(note1.getNote());
     }
 
     @Override
@@ -53,11 +53,8 @@ public class NoteUpdateActivity extends AppCompatActivity implements NoteRVAdapt
     }
 
     private void updateNote(){
-        EditText text = findViewById(R.id.updateET);
-        String noteText = text.getText().toString();
+        String noteText = editInput.getText().toString();
         String date = getCurrentDate();
-
-        Note note = (Note) v.getTag();
         note.setNote(noteText);
         note.setDate(date);
 
@@ -78,8 +75,4 @@ public class NoteUpdateActivity extends AppCompatActivity implements NoteRVAdapt
                 .format(new Date());
     }
 
-    @Override
-    public void onEdit(Note note) {
-        v.setTag(note);
-    }
 }

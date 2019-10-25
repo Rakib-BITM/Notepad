@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".NoteUpdateActivity">
 
 
@@ -13,5 +14,6 @@
         android:layout_height="match_parent"
         android:gravity="top|left"
         android:inputType="textMultiLine" />
+
 
 </LinearLayout>

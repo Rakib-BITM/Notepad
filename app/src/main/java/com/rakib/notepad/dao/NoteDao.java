@@ -19,7 +19,7 @@ public interface NoteDao {
     @Query("select * from Note order by id desc")
     List<Note> getAllNote();
 
-    @Query("select * from Note where id like:noteID")
+    @Query("select * from Note where id ==:noteID")
     Note getNoteByID(long noteID);
 
     @Update

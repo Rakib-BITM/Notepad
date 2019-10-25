@@ -24,12 +24,10 @@ import java.util.List;
 public class NoteRVAdapter extends RecyclerView.Adapter<NoteRVAdapter.NoteViewHolder>{
     private Context context;
     private List<Note> noteList;
-    private RowItemEditListener listener;
 
     public NoteRVAdapter(Context context, List<Note> noteList) {
         this.context = context;
         this.noteList = noteList;
-        listener = (RowItemEditListener) context;
     }
 
     @NonNull
@@ -62,9 +60,9 @@ public class NoteRVAdapter extends RecyclerView.Adapter<NoteRVAdapter.NoteViewHo
             public void onClick(View v) {
                 Note n = noteList.get(position);
                 long id = n.getId();
+                Note list = NoteDB.getInstance(context).getNoteDao().getNoteByID(id);
                 Intent intent = new Intent(context, NoteUpdateActivity.class);
-                intent.putExtra("noteId",id);
-                listener.onEdit(n);
+                intent.putExtra("note",n);
                 context.startActivity(intent);
             }
         });
@@ -121,9 +119,6 @@ public class NoteRVAdapter extends RecyclerView.Adapter<NoteRVAdapter.NoteViewHo
     }
 
 
-    public interface RowItemEditListener{
-        void onEdit(Note note);
-    }
 
 
 }
