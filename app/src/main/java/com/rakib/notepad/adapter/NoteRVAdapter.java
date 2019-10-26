@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,15 +22,18 @@ import com.rakib.notepad.db.NoteDB;
 import com.rakib.notepad.entity.Note;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class NoteRVAdapter extends RecyclerView.Adapter<NoteRVAdapter.NoteViewHolder>{
+public class NoteRVAdapter extends RecyclerView.Adapter<NoteRVAdapter.NoteViewHolder> {
     private Context context;
     private List<Note> noteList;
+    private List<Note> noteAllList;
 
     public NoteRVAdapter(Context context, List<Note> noteList) {
         this.context = context;
         this.noteList = noteList;
+        this.noteAllList = new ArrayList<>(noteList);
     }
 
     @NonNull
@@ -75,6 +80,7 @@ public class NoteRVAdapter extends RecyclerView.Adapter<NoteRVAdapter.NoteViewHo
     public int getItemCount() {
         return noteList.size();
     }
+
 
     public class NoteViewHolder extends RecyclerView.ViewHolder {
         TextView noteTV,noteDateTV;
